@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WizLight GUI Controller - Smart Light Control Made Easy</title>
+    <title>WizLight GUI Controller - Smart Light Control Made Easy for Desktop Users</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
@@ -552,7 +552,7 @@
                 <li><a href="#features">Features</a></li>
                 <li><a href="#screenshots">Screenshots</a></li>
                 <li><a href="#installation">Setup</a></li>
-                <li><a href="https://github.com/yourusername/wizlight-gui" target="_blank">
+                <li><a href="https://github.com/neailabs/wizlight-gui" target="_blank">
                     <i class="fab fa-github"></i> GitHub
                 </a></li>
             </ul>
@@ -566,10 +566,10 @@
                 <h1>WizLight GUI Controller</h1>
                 <p>A modern, intuitive desktop application for controlling Wiz smart lights. Built with PySide6 and Python, featuring automatic device discovery, RGB color control, scene management, and real-time status updates.</p>
                 <div class="cta-buttons">
-                    <a href="https://github.com/yourusername/wizlight-gui/releases" class="btn btn-primary" target="_blank">
+                    <a href="https://github.com/neailabs/wizlight-gui/releases" class="btn btn-primary" target="_blank">
                         <i class="fas fa-download"></i> Download
                     </a>
-                    <a href="https://github.com/yourusername/wizlight-gui" class="btn btn-secondary" target="_blank">
+                    <a href="https://github.com/neailabs/wizlight-gui" class="btn btn-secondary" target="_blank">
                         <i class="fab fa-github"></i> View Source
                     </a>
                 </div>
@@ -626,36 +626,28 @@
                 <h2 class="section-title">Application Screenshots</h2>
                 <div class="screenshot-grid">
                     <div class="screenshot-item">
-                        <div class="screenshot-placeholder">
-                            <i class="fas fa-desktop" style="font-size: 4rem; color: var(--secondary-color);"></i>
-                        </div>
+                        <img src="https://raw.githubusercontent.com/neailabs/neailabs.github.io/main/Wizlight-GUI.png" alt="Screenshot of the Wizlight GUI main window" class="screenshot-img">
                         <div class="screenshot-caption">
                             <h4>Main Control Interface</h4>
                             <p>Clean, intuitive interface with power controls, brightness adjustment, and RGB color selection.</p>
                         </div>
                     </div>
                     <div class="screenshot-item">
-                        <div class="screenshot-placeholder">
-                            <i class="fas fa-search" style="font-size: 4rem; color: var(--secondary-color);"></i>
-                        </div>
+                        <img src="https://raw.githubusercontent.com/neailabs/neailabs.github.io/main/device-discovery.png" alt="Screenshot of the device discovery screen" class="screenshot-img">
                         <div class="screenshot-caption">
                             <h4>Device Discovery</h4>
                             <p>Automatic network scanning with multi-network support and device information display.</p>
                         </div>
                     </div>
                     <div class="screenshot-item">
-                        <div class="screenshot-placeholder">
-                            <i class="fas fa-magic" style="font-size: 4rem; color: var(--secondary-color);"></i>
-                        </div>
+                        <img src="https://raw.githubusercontent.com/neailabs/neailabs.github.io/main/scene-selection.png" alt="Screenshot of the scene selection screen" class="screenshot-img">
                         <div class="screenshot-caption">
                             <h4>Scene Selection</h4>
                             <p>Browse and select from 32 built-in lighting scenes with preview and instant application.</p>
                         </div>
                     </div>
                     <div class="screenshot-item">
-                        <div class="screenshot-placeholder">
-                            <i class="fas fa-info-circle" style="font-size: 4rem; color: var(--secondary-color);"></i>
-                        </div>
+                        <img src="https://raw.githubusercontent.com/neailabs/neailabs.github.io/main/device-info.png" alt="Screenshot of the device information screen" class="screenshot-img">
                         <div class="screenshot-caption">
                             <h4>Device Information</h4>
                             <p>Detailed device information including IP address, MAC address, and device specifications.</p>
@@ -721,13 +713,13 @@ pip install PySide6>=6.4.0</pre>
                     <div class="code-block">
                         <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
                         <pre># Clone the repository
-git clone https://github.com/yourusername/wizlight-gui.git
+git clone https://github.com/neailabs/wizlight-gui.git
 cd wizlight-gui
 
 # Install dependencies
 pip install -r requirements.txt
 
-# Build the C++ backend (or download for macOS M-series)
+# Build the C++ backend from https://github.com/yachoukh/wizlightcpp (or download for macOS M-series from link below)
 mkdir build && cd build
 cmake .. && make
 
@@ -757,7 +749,7 @@ python build_macos.py</pre>
     <footer>
         <div class="footer-content">
             <div class="footer-links">
-                <a href="https://github.com/yourusername/wizlight-gui" target="_blank" title="GitHub">
+                <a href="https://github.com/neailabs/wizlight-gui" target="_blank" title="GitHub">
                     <i class="fab fa-github"></i>
                 </a>
                 <a href="https://www.neailabs.com" target="_blank" title="NE AI Innovation Labs">
