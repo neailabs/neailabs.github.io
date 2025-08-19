@@ -101,21 +101,6 @@
             color: var(--secondary-color);
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--secondary-color);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -129,7 +114,7 @@
 
         .hero-content {
             max-width: 800px;
-            animation: fadeInUp 1s ease-out;
+            z-index: 1;
         }
 
         .hero h1 {
@@ -199,6 +184,8 @@
             padding: 5rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .section-title {
@@ -215,7 +202,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin-bottom: 5rem;
+            margin-bottom: 3rem;
         }
 
         .feature-card {
@@ -230,26 +217,9 @@
             overflow: hidden;
         }
 
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
-        }
-
         .feature-card:hover {
             transform: translateY(-10px);
             border-color: var(--secondary-color);
-        }
-
-        .feature-card:hover::before {
-            opacity: 0.05;
         }
 
         .feature-icon {
@@ -274,6 +244,8 @@
         .screenshots {
             padding: 5rem 2rem;
             background: var(--darker-bg);
+            position: relative;
+            z-index: 1;
         }
 
         .screenshots-container {
@@ -350,6 +322,8 @@
             padding: 5rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .tech-grid {
@@ -393,6 +367,8 @@
         .installation {
             padding: 5rem 2rem;
             background: var(--darker-bg);
+            position: relative;
+            z-index: 1;
         }
 
         .installation-container {
@@ -435,12 +411,19 @@
             background: var(--primary-color);
         }
 
+        .installation h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
         /* Footer */
         footer {
             background: var(--darker-bg);
             padding: 3rem 2rem 2rem;
             text-align: center;
             border-top: 1px solid var(--card-border);
+            position: relative;
+            z-index: 1;
         }
 
         .footer-content {
@@ -461,10 +444,18 @@
             text-decoration: none;
             font-size: 1.5rem;
             transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border: 1px solid var(--card-border);
+            border-radius: 50%;
         }
 
         .footer-links a:hover {
             color: var(--secondary-color);
+            border-color: var(--secondary-color);
         }
 
         .footer-text {
@@ -481,27 +472,21 @@
             text-decoration: underline;
         }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* Scene showcase animation */
+        .scene-demo {
+            position: relative;
+            height: 200px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            background-size: 400% 400%;
+            animation: sceneFlow 8s ease-in-out infinite;
+            border-radius: 10px;
+            margin: 1rem 0;
+            overflow: hidden;
         }
 
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+        @keyframes sceneFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         /* Mobile Responsiveness */
@@ -535,22 +520,25 @@
             .tech-grid {
                 grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             }
+
+            .screenshot-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
-        /* Scene showcase animation */
-        .scene-demo {
+        /* Ensure all content is visible */
+        .content-wrapper {
             position: relative;
-            height: 200px;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
-            background-size: 400% 400%;
-            animation: sceneFlow 8s ease-in-out infinite;
-            border-radius: 10px;
-            margin: 1rem 0;
+            z-index: 1;
         }
 
-        @keyframes sceneFlow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+        /* Fix for webkit text fill */
+        @supports not (-webkit-background-clip: text) {
+            .hero h1,
+            .section-title,
+            .logo {
+                color: var(--secondary-color);
+            }
         }
     </style>
 </head>
@@ -571,167 +559,168 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>WizLight GUI Controller</h1>
-            <p>A modern, intuitive desktop application for controlling Wiz smart lights. Built with PySide6 and Python, featuring automatic device discovery, RGB color control, scene management, and real-time status updates.</p>
-            <div class="cta-buttons">
-                <a href="https://github.com/yourusername/wizlight-gui/releases" class="btn btn-primary" target="_blank">
-                    <i class="fas fa-download"></i> Download
-                </a>
-                <a href="https://github.com/yourusername/wizlight-gui" class="btn btn-secondary" target="_blank">
-                    <i class="fab fa-github"></i> View Source
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section id="features" class="features">
-        <h2 class="section-title fade-in">Key Features</h2>
-        <div class="features-grid">
-            <div class="feature-card fade-in">
-                <i class="fas fa-search-plus feature-icon"></i>
-                <h3>Auto Discovery</h3>
-                <p>Automatically detect Wiz lights on your network with multi-network scanning and intelligent broadcast IP detection.</p>
-            </div>
-            <div class="feature-card fade-in">
-                <i class="fas fa-palette feature-icon"></i>
-                <h3>RGB Color Control</h3>
-                <p>Full RGB color control with intuitive sliders, color picker dialog, and real-time color preview for perfect lighting.</p>
-            </div>
-            <div class="feature-card fade-in">
-                <i class="fas fa-theater-masks feature-icon"></i>
-                <h3>32 Built-in Scenes</h3>
-                <p>Choose from 32 pre-configured lighting scenes including Ocean, Sunset, Party, Forest, and many more atmospheric options.</p>
-            </div>
-            <div class="feature-card fade-in">
-                <i class="fas fa-thermometer-half feature-icon"></i>
-                <h3>Color Temperature</h3>
-                <p>Adjust white light temperature from warm 1000K to cool 8000K for the perfect ambiance at any time of day.</p>
-            </div>
-            <div class="feature-card fade-in">
-                <i class="fas fa-tachometer-alt feature-icon"></i>
-                <h3>Animation Speed Control</h3>
-                <p>Fine-tune the speed of dynamic scenes and color-changing effects with precision speed control from 0-100%.</p>
-            </div>
-            <div class="feature-card fade-in">
-                <i class="fas fa-sync-alt feature-icon"></i>
-                <h3>Real-time Updates</h3>
-                <p>Automatic status monitoring with 5-second refresh intervals to keep your interface synchronized with your lights.</p>
-            </div>
-        </div>
-
-        <!-- Scene Demo -->
-        <div class="feature-card fade-in" style="max-width: 600px; margin: 0 auto;">
-            <h3>Dynamic Scene Preview</h3>
-            <div class="scene-demo"></div>
-            <p>Experience smooth color transitions and dynamic lighting effects with our advanced scene engine.</p>
-        </div>
-    </section>
-
-    <!-- Screenshots Section -->
-    <section id="screenshots" class="screenshots">
-        <div class="screenshots-container">
-            <h2 class="section-title fade-in">Application Screenshots</h2>
-            <div class="screenshot-grid">
-                <div class="screenshot-item fade-in">
-                    <div class="screenshot-placeholder">
-                        <i class="fas fa-desktop" style="font-size: 4rem; color: var(--secondary-color);"></i>
-                    </div>
-                    <div class="screenshot-caption">
-                        <h4>Main Control Interface</h4>
-                        <p>Clean, intuitive interface with power controls, brightness adjustment, and RGB color selection.</p>
-                    </div>
-                </div>
-                <div class="screenshot-item fade-in">
-                    <div class="screenshot-placeholder">
-                        <i class="fas fa-search" style="font-size: 4rem; color: var(--secondary-color);"></i>
-                    </div>
-                    <div class="screenshot-caption">
-                        <h4>Device Discovery</h4>
-                        <p>Automatic network scanning with multi-network support and device information display.</p>
-                    </div>
-                </div>
-                <div class="screenshot-item fade-in">
-                    <div class="screenshot-placeholder">
-                        <i class="fas fa-magic" style="font-size: 4rem; color: var(--secondary-color);"></i>
-                    </div>
-                    <div class="screenshot-caption">
-                        <h4>Scene Selection</h4>
-                        <p>Browse and select from 32 built-in lighting scenes with preview and instant application.</p>
-                    </div>
-                </div>
-                <div class="screenshot-item fade-in">
-                    <div class="screenshot-placeholder">
-                        <i class="fas fa-info-circle" style="font-size: 4rem; color: var(--secondary-color);"></i>
-                    </div>
-                    <div class="screenshot-caption">
-                        <h4>Device Information</h4>
-                        <p>Detailed device information including IP address, MAC address, and device specifications.</p>
-                    </div>
+    <div class="content-wrapper">
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>WizLight GUI Controller</h1>
+                <p>A modern, intuitive desktop application for controlling Wiz smart lights. Built with PySide6 and Python, featuring automatic device discovery, RGB color control, scene management, and real-time status updates.</p>
+                <div class="cta-buttons">
+                    <a href="https://github.com/yourusername/wizlight-gui/releases" class="btn btn-primary" target="_blank">
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                    <a href="https://github.com/yourusername/wizlight-gui" class="btn btn-secondary" target="_blank">
+                        <i class="fab fa-github"></i> View Source
+                    </a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Tech Stack Section -->
-    <section id="tech" class="tech-stack">
-        <h2 class="section-title fade-in">Built With</h2>
-        <div class="tech-grid">
-            <div class="tech-item fade-in">
-                <i class="fab fa-python"></i>
-                <h4>Python</h4>
-                <p>Core application logic</p>
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <h2 class="section-title">Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-search-plus feature-icon"></i>
+                    <h3>Auto Discovery</h3>
+                    <p>Automatically detect Wiz lights on your network with multi-network scanning and intelligent broadcast IP detection.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-palette feature-icon"></i>
+                    <h3>RGB Color Control</h3>
+                    <p>Full RGB color control with intuitive sliders, color picker dialog, and real-time color preview for perfect lighting.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-theater-masks feature-icon"></i>
+                    <h3>32 Built-in Scenes</h3>
+                    <p>Choose from 32 pre-configured lighting scenes including Ocean, Sunset, Party, Forest, and many more atmospheric options.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-thermometer-half feature-icon"></i>
+                    <h3>Color Temperature</h3>
+                    <p>Adjust white light temperature from warm 1000K to cool 8000K for the perfect ambiance at any time of day.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-tachometer-alt feature-icon"></i>
+                    <h3>Animation Speed Control</h3>
+                    <p>Fine-tune the speed of dynamic scenes and color-changing effects with precision speed control from 0-100%.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-sync-alt feature-icon"></i>
+                    <h3>Real-time Updates</h3>
+                    <p>Automatic status monitoring with 5-second refresh intervals to keep your interface synchronized with your lights.</p>
+                </div>
             </div>
-            <div class="tech-item fade-in">
-                <i class="fas fa-window-maximize"></i>
-                <h4>PySide6</h4>
-                <p>Modern Qt6 GUI framework</p>
-            </div>
-            <div class="tech-item fade-in">
-                <i class="fas fa-code"></i>
-                <h4>C++</h4>
-                <p>High-performance backend</p>
-            </div>
-            <div class="tech-item fade-in">
-                <i class="fas fa-network-wired"></i>
-                <h4>UDP Protocol</h4>
-                <p>Device communication</p>
-            </div>
-            <div class="tech-item fade-in">
-                <i class="fab fa-apple"></i>
-                <h4>macOS Ready</h4>
-                <p>Native macOS support</p>
-            </div>
-            <div class="tech-item fade-in">
-                <i class="fas fa-moon"></i>
-                <h4>Dark Mode</h4>
-                <p>Adaptive theming</p>
-            </div>
-        </div>
-    </section>
 
-    <!-- Installation Section -->
-    <section id="installation" class="installation">
-        <div class="installation-container">
-            <h2 class="section-title fade-in">Quick Setup</h2>
-            
-            <div class="fade-in">
-                <h3 style="color: var(--secondary-color); margin-bottom: 1rem;">Prerequisites</h3>
-                <div class="code-block">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
-                    <pre># Python 3.8+ and PySide6 required
+            <!-- Scene Demo -->
+            <div class="feature-card" style="max-width: 600px; margin: 0 auto;">
+                <h3>Dynamic Scene Preview</h3>
+                <div class="scene-demo"></div>
+                <p>Experience smooth color transitions and dynamic lighting effects with our advanced scene engine.</p>
+            </div>
+        </section>
+
+        <!-- Screenshots Section -->
+        <section id="screenshots" class="screenshots">
+            <div class="screenshots-container">
+                <h2 class="section-title">Application Screenshots</h2>
+                <div class="screenshot-grid">
+                    <div class="screenshot-item">
+                        <div class="screenshot-placeholder">
+                            <i class="fas fa-desktop" style="font-size: 4rem; color: var(--secondary-color);"></i>
+                        </div>
+                        <div class="screenshot-caption">
+                            <h4>Main Control Interface</h4>
+                            <p>Clean, intuitive interface with power controls, brightness adjustment, and RGB color selection.</p>
+                        </div>
+                    </div>
+                    <div class="screenshot-item">
+                        <div class="screenshot-placeholder">
+                            <i class="fas fa-search" style="font-size: 4rem; color: var(--secondary-color);"></i>
+                        </div>
+                        <div class="screenshot-caption">
+                            <h4>Device Discovery</h4>
+                            <p>Automatic network scanning with multi-network support and device information display.</p>
+                        </div>
+                    </div>
+                    <div class="screenshot-item">
+                        <div class="screenshot-placeholder">
+                            <i class="fas fa-magic" style="font-size: 4rem; color: var(--secondary-color);"></i>
+                        </div>
+                        <div class="screenshot-caption">
+                            <h4>Scene Selection</h4>
+                            <p>Browse and select from 32 built-in lighting scenes with preview and instant application.</p>
+                        </div>
+                    </div>
+                    <div class="screenshot-item">
+                        <div class="screenshot-placeholder">
+                            <i class="fas fa-info-circle" style="font-size: 4rem; color: var(--secondary-color);"></i>
+                        </div>
+                        <div class="screenshot-caption">
+                            <h4>Device Information</h4>
+                            <p>Detailed device information including IP address, MAC address, and device specifications.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack Section -->
+        <section id="tech" class="tech-stack">
+            <h2 class="section-title">Built With</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <i class="fab fa-python"></i>
+                    <h4>Python</h4>
+                    <p>Core application logic</p>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-window-maximize"></i>
+                    <h4>PySide6</h4>
+                    <p>Modern Qt6 GUI framework</p>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-code"></i>
+                    <h4>C++</h4>
+                    <p>High-performance backend</p>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-network-wired"></i>
+                    <h4>UDP Protocol</h4>
+                    <p>Device communication</p>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-apple"></i>
+                    <h4>macOS Ready</h4>
+                    <p>Native macOS support</p>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-moon"></i>
+                    <h4>Dark Mode</h4>
+                    <p>Adaptive theming</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Installation Section -->
+        <section id="installation" class="installation">
+            <div class="installation-container">
+                <h2 class="section-title">Quick Setup</h2>
+                
+                <div>
+                    <h3>Prerequisites</h3>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                        <pre># Python 3.8+ and PySide6 required
 pip install PySide6>=6.4.0</pre>
+                    </div>
                 </div>
-            </div>
 
-            <div class="fade-in">
-                <h3 style="color: var(--secondary-color); margin-bottom: 1rem;">Installation</h3>
-                <div class="code-block">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
-                    <pre># Clone the repository
+                <div>
+                    <h3>Installation</h3>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                        <pre># Clone the repository
 git clone https://github.com/yourusername/wizlight-gui.git
 cd wizlight-gui
 
@@ -745,23 +734,24 @@ cmake .. && make
 # Run the application
 cd wizlight-gui
 python main.py</pre>
+                    </div>
                 </div>
-            </div>
 
-            <div class="fade-in">
-                <h3 style="color: var(--secondary-color); margin-bottom: 1rem;">macOS Users</h3>
-                <div class="code-block">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
-                    <pre># For M-series Macs, download pre-built binary
-# Download from: https://www.neailabs.com/download/1006/
+                <div>
+                    <h3>macOS Users</h3>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                        <pre># For M-series Macs, download pre-built binary
+# Download from: https://www.neailabs.com/download/1006/?tmstv=1755590204
 # Place in ../build/ directory
 
 # Create macOS app bundle
 python build_macos.py</pre>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -800,27 +790,7 @@ python build_macos.py</pre>
             });
         });
 
-        // Fade in animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        // Observe all fade-in elements
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
         // Navbar background on scroll
-        let lastScrollTop = 0;
         window.addEventListener('scroll', () => {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             const navbar = document.getElementById('navbar');
@@ -830,8 +800,6 @@ python build_macos.py</pre>
             } else {
                 navbar.style.background = 'rgba(22, 33, 62, 0.95)';
             }
-            
-            lastScrollTop = scrollTop;
         });
 
         // Copy to clipboard functionality
@@ -839,17 +807,20 @@ python build_macos.py</pre>
             const codeBlock = button.parentNode.querySelector('pre');
             const text = codeBlock.textContent;
             
-            navigator.clipboard.writeText(text).then(() => {
-                const originalText = button.textContent;
-                button.textContent = 'Copied!';
-                button.style.background = 'var(--primary-color)';
-                
-                setTimeout(() => {
-                    button.textContent = originalText;
-                    button.style.background = 'var(--secondary-color)';
-                }, 2000);
-            }).catch(err => {
-                console.error('Failed to copy: ', err);
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text).then(() => {
+                    const originalText = button.textContent;
+                    button.textContent = 'Copied!';
+                    button.style.background = 'var(--primary-color)';
+                    
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.style.background = 'var(--secondary-color)';
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+            } else {
                 // Fallback for older browsers
                 const textArea = document.createElement('textarea');
                 textArea.value = text;
@@ -862,31 +833,13 @@ python build_macos.py</pre>
                 setTimeout(() => {
                     button.textContent = 'Copy';
                 }, 2000);
-            });
+            }
         }
 
-        // Dynamic color animation for scene demo
-        let hue = 0;
-        setInterval(() => {
-            hue = (hue + 1) % 360;
-            const sceneDemo = document.querySelector('.scene-demo');
-            if (sceneDemo) {
-                sceneDemo.style.filter = `hue-rotate(${hue}deg)`;
-            }
-        }, 50);
-
-        // Particle effect for hero section
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.style.position = 'absolute';
-            particle.style.width = Math.random() * 4 + 2 + 'px';
-            particle.style.height = particle.style.width;
-            particle.style.background = Math.random() > 0.5 ? 'var(--primary-color)' : 'var(--secondary-color)';
-            particle.style.borderRadius = '50%';
-            particle.style.opacity = Math.random() * 0.5 + 0.2;
-            particle.style.left = Math.random() * window.innerWidth + 'px';
-            particle.style.top = window.innerHeight + 'px';
-            particle.style.pointerEvents = 'none';
-            particle.style.zIndex = '-1';
-            
-            document.body.appendChild(particle);
+        // Simple fade in effect on page load
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
+        });
+    </script>
+</body>
+</html>
