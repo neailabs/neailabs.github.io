@@ -1,102 +1,107 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>NE AI Innovation Labs' Github Page</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        line-height: 1.6;
-        margin: 40px;
-        background-color: #f4f4f4;
-        color: #333;
-    }
-    .container {
-        max-width: 800px;
-        margin: auto;
-        padding: 20px;
-        background: #fff;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    h1, h2 {
-        color: #0366d6;
-    }
-    .artifact-list {
-        list-style-type: none;
-        padding: 0;
-    }
-    .artifact-item {
-        background: #fafafa;
-        border: 1px solid #ddd;
-        margin-bottom: 10px;
-        padding: 15px;
-        border-radius: 5px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .artifact-name {
-        font-weight: bold;
-    }
-    .download-button {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #28a745;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-        transition: background-color 0.3s;
-    }
-    .download-button:hover {
-        background-color: #218838;
-    }
-    .github-link {
-        margin-top: 20px;
-        display: block;
-        color: #0366d6;
-        text-decoration: none;
-    }
-    .github-link:hover {
-        text-decoration: underline;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NE AI Innovation Labs - Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .header {
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .header p {
+            margin: 5px 0 0;
+            font-size: 1.2em;
+            color: #666;
+        }
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+        .project-card {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .project-info {
+            padding: 15px;
+        }
+        .project-info h3 {
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+        .project-info p {
+            font-size: 1em;
+            color: #555;
+            line-height: 1.4;
+        }
+        .project-info a {
+            display: inline-block;
+            margin-top: 10px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .project-info a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>FREE Google Maps Scraper</h1>
-    <p>Welcome to the download page for the free Google Maps Scraper. It's a project we built as proof-of-concept for our <a href="https://www.neailabs.com/workshops/">workshop</a> participants that you can build useful stuff in a weekend session using AI.<br>
-        Below you will find links to download the program. Click the "Download" button to get the files.</p>
-    <p>
-        If you like this program and find it useful, kindly consider donating to our instructor-in-chief using the link below:<br><br>
+    <header class="header">
+        <h1>NE AI Innovation Labs</h1>
+        <p>A portfolio of AI-powered and open-source projects.</p>
+    </header>
 
-        <a href='https://ko-fi.com/N4N8V6LW6' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi6.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
-    </p>
+    <main class="portfolio-grid">
 
-    <h2>Latest Version</h2>
-    <p>
-      <b>GMaps Scraper</b>: A desktop app that allows you to search and download Google Maps business listings to an Excel file or even as CSV or JSON files. 
-       Available for both Mac and Windows.<br><br>
-      <img src="https://raw.githubusercontent.com/neailabs/neailabs.github.io/main/GMaps%20Scraper%20Main%20Window.png" alt="Screenshot of the GMaps Scraper main window" style="max-width: 100%; height: auto;"><br>
-    </p>
-    <ul class="artifact-list">
-        <li class="artifact-item">
-            <span class="artifact-name">GMaps Scraper For Mac</span>
-            <a href="https://github.com/neailabs/GMaps-Scraper/releases/download/v1.0.7/GMaps-Scraper-MacOS-Silicon.zip" class="download-button" target="_blank">Download</a>
-        </li>
-        <li class="artifact-item">
-            <span class="artifact-name">GMaps Scraper For Windows</span>
-            <a href="https://github.com/neailabs/GMaps-Scraper/releases/download/v1.0.7/GMaps-Scraper-Windows.exe" class="download-button" target="_blank">Download</a>
-        </li>
-        <li class="artifact-item">
-            <span class="artifact-name">GMaps Scraper For Linux</span>
-            <a href="https://github.com/neailabs/GMaps-Scraper/releases/download/v1.0.7/GMaps-Scraper-Linux" class="download-button" target="_blank">Download</a>
-        </li>
-    </ul>
+        <div class="project-card">
+            <img src="https://via.placeholder.com/600x400.png?text=Gmaps+Scraper+Image" alt="Gmaps Scraper project screenshot">
+            <div class="project-info">
+                <h3>Gmaps Scraper</h3>
+                <p>A desktop GUI application that fetches business listings from Google Maps using the Places API.</p>
+                <a href="https://neailabs.github.io/gmaps-scraper.html" target="_blank">View Project &rarr;</a>
+            </div>
+        </div>
 
+        <div class="project-card">
+            <img src="https://via.placeholder.com/600x400.png?text=Wizlight+GUI+Image" alt="Wizlight GUI project screenshot">
+            <div class="project-info">
+                <h3>Wizlight GUI</h3>
+                <p>A cross-platform desktop app for controlling Wiz smart lights with a user-friendly interface.</p>
+                <a href="https://neailabs.github.io/wizlight-gui.html" target="_blank">View Project &rarr;</a>
+            </div>
+        </div>
 
-    <a href="https://github.com/neailabs/GMaps-Scraper/" class="github-link" target="_blank">Visit our GitHub Repository</a>
-</div>
+        </main>
 
 </body>
 </html>
